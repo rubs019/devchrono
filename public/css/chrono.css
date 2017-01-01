@@ -1,0 +1,46 @@
+body {
+  font: 14px "sans-serif", Helvetica, Arial, sans-serif;
+}
+.navbar-inverse {
+  border-radius: 0px;
+}
+a {
+  color: #00B7FF;
+}
+#chrono_template {
+  padding-top: 50px;
+  margin: auto;
+  text-align: center;
+}
+#button_group {
+  margin-top: 25px;
+}
+#circle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 4px solid #777;
+  cursor: pointer;
+}
+#timer span#timer_seconds::before {
+  content:':';
+}
+#timer span#timer_seconds {
+  left: 50%;
+}
+#circle #timer {
+  position: absolute;
+  top: 35%;
+  left: 15%;
+}
+#status p {
+  position: absolute;
+  bottom: 8%;
+  left: 42%;
+}
+#circle span {
+  font-size: 5em;
+  color: #777;
+}

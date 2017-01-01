@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <!-- Material Design fonts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/chrono.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">DevChrono</a>
+            </div>
+        </div>
+    </nav>
+    <div id="chrono_template">
+        <div id="circle">
+            <div id="timer">
+                <span id="timer_minute">00</span>
+                <span id="timer_seconds">00</span>
+            </div>
+            <div id="status">
+                <p class=""></p>
+            </div>
+        </div>
+        <div id="button_group">
+            <button id="timer_reset" class="btn btn-danger">Reset</button>
+            <button id="timer_save" class="btn btn-success">Save</button>
+        </div>
+    </div>
+    <script src="/js/chrono.js"></script>
+</body>
+</html>
