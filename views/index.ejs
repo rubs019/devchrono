@@ -24,7 +24,7 @@
         </div>
     </nav>
     <div id="chrono_template">
-        <div id="circle">
+        <div id="circle" class="bubble-anim">
             <div id="timer">
                 <span id="timer_minute">00</span>
                 <span id="timer_seconds">00</span>
@@ -35,7 +35,17 @@
         </div>
         <div id="button_group">
             <button id="timer_reset" class="btn btn-danger">Reset</button>
-            <button id="timer_save" class="btn btn-success">Save</button>
+        </div>
+    </div>
+    <div id="tasks">
+        <div class="col-md-4 col-md-offset-4">
+            <form action="#">
+                <label for="">Title tasks</label>
+                <input type="text" id="title_tasks" class="form-control">
+                <label for="">What's your tasks ?</label>
+                <textarea type="text" id="content_tasks" class="form-control" rows="3"></textarea>
+                <button id="timer_save" class="btn btn-success right">Save</button>
+            </form>
         </div>
     </div>
     <script src="/js/chrono.js"></script>

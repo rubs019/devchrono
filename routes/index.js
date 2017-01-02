@@ -13,4 +13,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title : title, tab : data, tab2 : data2 });
 });
 
+router.post('/save', function(req, res, next){
+  var data = req.body;
+
+  res.json({callback:true, data: data})
+});
+
 module.exports = router;

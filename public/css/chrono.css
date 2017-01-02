@@ -15,6 +15,13 @@ a {
 #button_group {
   margin-top: 25px;
 }
+form textarea.form-control {
+  height: 150px;
+  margin-bottom: 20px;
+}
+.right {
+  float: right;
+}
 #circle {
   width: 300px;
   height: 300px;
@@ -23,6 +30,9 @@ a {
   position: relative;
   border: 4px solid #777;
   cursor: pointer;
+}
+.circle-anim {
+  animation: bubble-anim 1s ease-out 1;
 }
 #timer span#timer_seconds::before {
   content:':';
@@ -38,9 +48,30 @@ a {
 #status p {
   position: absolute;
   bottom: 8%;
-  left: 42%;
+  left: 40%;
+  padding: 5px;
 }
 #circle span {
   font-size: 5em;
   color: #777;
+}
+@keyframes bubble-anim {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scaleY(0.95) scaleX(1.05);
+  }
+  48% {
+    transform: scaleY(1.1) scaleX(0.9);
+  }
+  68% {
+    transform: scaleY(0.98) scaleX(1.02);
+  }
+  80% {
+    transform: scaleY(1.02) scaleX(0.98);
+  }
+  97%, 100% {
+    transform: scale(1);
+  }
 }
