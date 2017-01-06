@@ -3,10 +3,10 @@
  */
 (function(){
 	var onPlay = false;
-	var chrono, i = 0, minute = 0;
+	var chrono, s = 0, minute = 0;
 
 	$('#circle').click(function(){
-		$(this).removeClass('circle-anim').addClass('circle-anim');
+		$(this).toggleClass('circle-anim');
 		// Switch timer TRUE/FALSE
 		app.checkTimer(onPlay, function(callback){
 			onPlay = callback;
@@ -37,9 +37,9 @@
 			dataType: 'json',
 			data: {
 				minute: minute,
-				second: i,
-				title: $('#title_tasks').val(),
-				content: $('#content_tasks').val()
+				second: s,
+				title: encodeURI($('#title_tasks').val()),
+				content: encodeURI($('#content_tasks').val())
 			}
 		})
 		.done(function(callback){
@@ -54,20 +54,20 @@
 
 	var app = {
 		chronoStart : function(callback){
-			if(i == 0) {
+			if(s == 0) {
 				console.log('Lancement du chrono');
 			} else {
 				console.log('Reprise du chrono');
 			}
 			chrono = setInterval(function(){
-				i++;
+				s++;
 				app.chronoPrint();
 			}, 1000);
 
 			callback();
 		},
 		chronoStop : function(callback){
-			console.log('Arret du chrono : '+ minute +':'+ i);
+			console.log('Arret du chrono : '+ minute +':'+ s);
 			clearInterval(chrono);
 			if(callback != undefined) {
 				callback();
@@ -75,30 +75,30 @@
 			this.chronoStatus(false);
 		},
 		chronoReset : function(){
-			i = 0;
+			s = 0;
 			minute = 0;
 			app.chronoPrint();
 			app.chronoStatus();
-			console.log('Chrono RESET : '+ i);
+			console.log('Chrono RESET : '+ s);
 			console.log('Chrono RESET(mn): '+ minute);
 		},
 		chronoPrint : function(){
 
-			if( i >= 60) {
+			if( s >= 60) {
 				minute = minute+1;
-				i = 0;
+				s = 0;
 			}
-			if(minute <= 10){
+			if(minute < 10){
 				$('#timer_minute').text('0'+minute);
 			} else if(minute > 99){
 				this.chronoStop(null);
 			} else {
 				$('#timer_minute').text(minute);
 			}
-			if ( i < 10){
-				$('#timer_seconds').text('0'+i);
+			if ( s < 10){
+				$('#timer_seconds').text('0'+s);
 			} else {
-				$('#timer_seconds').text(i);
+				$('#timer_seconds').text(s);
 			}
 		},
 		chronoStatus : function(status){
