@@ -1,6 +1,6 @@
 # devchrono
 
-Track your time development with this tools.
+Track your time development with this tools.<br>
 New feature will be added, like :
 - Login
 - Statistics
