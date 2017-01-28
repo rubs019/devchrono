@@ -3,8 +3,7 @@
  */
 (function(){
 	var onPlay = false;
-	var chrono, s = 0, minute = 0;
-
+	var chrono, s = parseInt($('#timer_seconds').text()), minute = parseInt($('#timer_minute').text());
 	$('#circle').click(function(){
 		$(this).toggleClass('circle-anim');
 		// Switch timer TRUE/FALSE
@@ -90,12 +89,16 @@
 			}
 			if(minute < 10){
 				$('#timer_minute').text('0'+minute);
-			} else if(minute > 99){
+			}
+			else if(minute > 99){
 				this.chronoStop(null);
-			} else {
+			}
+			else {
 				$('#timer_minute').text(minute);
 			}
-			if ( s < 10){
+
+			if ( s < 10)
+			{
 				$('#timer_seconds').text('0'+s);
 			} else {
 				$('#timer_seconds').text(s);
@@ -118,11 +121,9 @@
 
 		},
 		checkTimer : function(status, callback){
-			if(status == false){
-				callback(!status);
-				return;
-			}
-			callback(!status)
+			// Permet de changer le status du chrono suivant valeur d'origine
+			//ex: if status = true => renvoi false
+			return callback(!status);
 		}
 	}
-})();
+})(window);
