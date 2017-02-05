@@ -1,59 +1,62 @@
-var express = require('express');
-var router = express.Router();
-var ejs = require('ejs');
-var MongoClient = require('mongodb').MongoClient
-	, assert = require('assert');
+'use strict';
+let express = require('express');
+let router = express.Router();
+let ejs = require('ejs');
+let model = require('../model/db_con');
+let mysql	=	require('mysql');
+let moment = require('moment');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var title = "Pomodoro";
+  let title = "DevChrono";
   res.render('index', { title : title});
 });
 
-router.post('/save', function(req, res, next){
-  var data = req.body;
-  console.log(data);
-
-  // Connection URL
-  var url = 'mongodb://local.dev:27017/';
-
-  // Use connect method to connect to the server
-  MongoClient.connect(url, function(err, db) {
-      assert.equal(null, err);
-      console.log("Connected successfully to server");
-
-	  var insertPomo = function(db, callback) {
-		  // Get the documents collection
-		  var collection = db.collection('documents');
-		  // Insert some documents
-		  collection.insertMany([
-			  {minute : data.minute}, {second : data.second}, {title : data.title}, {content : data.content}
-		  ], function(err, result) {
-			  assert.equal(err, null);
-			  assert.equal(3, result.result.n);
-			  assert.equal(3, result.ops.length);
-			  console.log("Inserted 3 documents into the collection");
-			  callback(result);
-		  });
-	  };
-	  var findDocuments = function(db, callback) {
-		  // Get the documents collection
-		  var collection = db.collection('documents');
-		  // Find some documents
-		  collection.find({}).toArray(function(err, docs) {
-			  assert.equal(err, null);
-			  console.log("Found the following records");
-			  console.log(docs);
-			  callback(docs);
-		  });
-	  };
-	  insertPomo(db, function(){
-		  findDocuments(db, function() {
-			  db.close();
-			  res.json({callback:true, data: data})
-		  });
-      });
-  });
+router.post('/tasks/save', function(req, res, next){
+    const dbParam = {
+        host     : 'localhost',
+        user     : 'root',
+        password : 'root',
+        database : 'devchrono'
+    };
+	let data = req.body;
+    let connection = mysql.createConnection(dbParam);
+    connection.connect(function(err){
+        let mysqlTimestamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+        if(err) {
+            console.log('Error connecting : ' + err.stack);
+            return false;
+        }
+        console.log('Connecting to Database : SUCCESS !');
+        connection.query('INSERT INTO data ' +
+			'(data_id, datastamp, data_title, data_content, data_min, data_sec)' +
+			'VALUES (NULL, ?, ?, ?, ?, ?)',
+			[mysqlTimestamp, data.title, data.content, data.minute, data.second], function(error, results, fields){
+                console.log(results);
+                if (error) {
+                    return connection.rollback(function() {
+                        throw error;
+                    });
+                }
+            });
+    });
+	/*if(model.connexion()){
+		let connection = model.connexion();
+        console.log(data);
+		connection.query('INSERT INTO data SET data_title=?, data_content=? data_min=?, data_sec=?',
+			data.title, data.content, data.minute, data.second, function(error, results, fields){
+                console.log(results);
+                if (error) {
+                    return connection.rollback(function() {
+                        throw error;
+                    });
+                }
+            });
+        res.json('true');
+	} else {
+		console.log('Error MODEL CONNEXION');
+	}*/
 });
 
 module.exports = router;

@@ -14,7 +14,7 @@
 			onPlay = callback;
 			if(onPlay){
 				app.chronoStart(function(){
-					app.chronoStatus(true);
+					app.chronoStatusText(true);
 				});
 				return;
 			}
@@ -22,7 +22,7 @@
 				app.chronoReset();
 			}
 			app.chronoStop(function(){
-				app.chronoStatus(false);
+				app.chronoStatusText(false);
 			});
 		});
 
@@ -37,7 +37,7 @@
 	$('#timer_save').click(function(evt){
 		evt.preventDefault();
 		$.ajax({
-			url: '/save',
+			url: '/tasks/save',
 			type: 'POST',
 			dataType: 'json',
 			data: {
@@ -77,13 +77,13 @@
 			if(callback != undefined) {
 				callback();
 			}
-			this.chronoStatus(false);
+			this.chronoStatusText(false);
 		},
 		chronoReset : function(){
 			s = 0;
 			minute = 0;
 			app.chronoPrint();
-			app.chronoStatus();
+			app.chronoStatusText();
 			console.log('Chrono RESET : '+ s);
 			console.log('Chrono RESET(mn): '+ minute);
 		},
@@ -110,7 +110,7 @@
 				$('#timer_seconds').text(s);
 			}
 		},
-		chronoStatus : function(status){
+		chronoStatusText : function(status){
 			if(status == undefined){
 				$('#status p').text('');
 				return
@@ -133,5 +133,3 @@
 		}
 	}
 })(window);
-
-

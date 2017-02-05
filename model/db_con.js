@@ -1,7 +1,26 @@
 /**
  * Created by rubz_johnson on 04/01/17.
  */
-module.exports = {
+'use strict';
+let mysql	=	require('mysql');
 
-	connexion : function(){
+const dbParam = {
+    host     : 'localhost',
+    user     : 'root',
+    password : 'root',
+    database : 'devchrono'
+};
+
+module.exports = {
+    connexion : function(callback) {
+       let connection = mysql.createConnection(dbParam);
+        connection.connect(function(err){
+        	if(err) {
+                console.log('Error connecting : ' + err.stack);
+                return false;
+            }
+            console.log('Connecting to Database : SUCCESS !');
+            return true;
+		});
+    }
 };

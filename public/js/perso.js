@@ -1,4 +1,4 @@
-(function recuperationTime(){
+(function getChrono(){
   // Récupération des informations du chrono en session si existante
   if(window.localStorage.min != undefined){
     $('#timer_minute').text(window.localStorage.min)
@@ -8,7 +8,7 @@
   }
 })(window.onload);
 
-(function(){
+(function saveChrono(){
   // Enregistrement du temps du chrono avant de fermer la page
   window.onbeforeunload = function(){
     window.localStorage.setItem('sec', $('#timer_seconds').text())
