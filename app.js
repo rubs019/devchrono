@@ -31,6 +31,7 @@ app.use('/img', express.static(__dirname + '/public/img'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  // TODO: Make 404
   let err = new Error('Not Found');
   err.status = 404;
   next(err);

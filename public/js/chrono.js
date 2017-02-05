@@ -5,6 +5,7 @@
 (function(){
 	var onPlay = false;
 	var chrono, s = parseInt($('#timer_seconds').text()), minute = parseInt($('#timer_minute').text());
+	// TODO: Sauvegarder les informations des INPUT
 
 	$('#circle').click(function(){
 		$(this).toggleClass('circle-anim');
@@ -50,9 +51,11 @@
 		.done(function(callback){
 			console.log(callback);
 			if(callback){
+				$.notify("Informations sauvegardé", "success");
 				console.log('success');
 				return;
 			}
+			$.notify("Erreur : Veuillez réessayer plus tard", "error");
 			console.log('error');
 		})
 	});

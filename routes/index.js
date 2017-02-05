@@ -8,7 +8,7 @@ let moment = require('moment');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   let title = "DevChrono";
   res.render('index', { title : title});
 });
@@ -39,24 +39,9 @@ router.post('/tasks/save', function(req, res, next){
                         throw error;
                     });
                 }
+                res.json('true');
             });
     });
-	/*if(model.connexion()){
-		let connection = model.connexion();
-        console.log(data);
-		connection.query('INSERT INTO data SET data_title=?, data_content=? data_min=?, data_sec=?',
-			data.title, data.content, data.minute, data.second, function(error, results, fields){
-                console.log(results);
-                if (error) {
-                    return connection.rollback(function() {
-                        throw error;
-                    });
-                }
-            });
-        res.json('true');
-	} else {
-		console.log('Error MODEL CONNEXION');
-	}*/
 });
 
 module.exports = router;
