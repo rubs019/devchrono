@@ -1,13 +1,16 @@
 /**
  * Created by rubz_johnson on 01/01/17.
  */
+'use strict';
 (function(){
 	var onPlay = false;
 	var chrono, s = parseInt($('#timer_seconds').text()), minute = parseInt($('#timer_minute').text());
+
 	$('#circle').click(function(){
 		$(this).toggleClass('circle-anim');
+
 		// Switch timer TRUE/FALSE
-		app.checkTimer(onPlay, function(callback){
+		app.timerOnOff(onPlay, function(callback){
 			onPlay = callback;
 			if(onPlay){
 				app.chronoStart(function(){
@@ -26,7 +29,10 @@
 	});
 
 	$('#timer_reset').click(function(){
-		app.chronoReset();
+		app.timerOnOff(onPlay, function(callback){
+			onPlay = callback;
+            app.chronoReset();
+		});
 	});
 	$('#timer_save').click(function(evt){
 		evt.preventDefault();
@@ -120,10 +126,12 @@
 			$('#status p').text('Fin du timer');
 
 		},
-		checkTimer : function(status, callback){
+		timerOnOff : function(status, callback){
 			// Permet de changer le status du chrono suivant valeur d'origine
 			//ex: if status = true => renvoi false
 			return callback(!status);
 		}
 	}
 })(window);
+
+
