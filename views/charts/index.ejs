@@ -27,12 +27,14 @@
     <div id="category_template">
         <div class="container">
             <ul class="group-card">
-                <li class="col-md-3">
+                <% category.forEach(function(element){ %>
+                <li class="col-md-3 col-sm-6">
                     <a class="card-panel" href="#">
-                        <span>Users</span>
+                        <span><%= element.cat_name %></span>
                     </a>
                 </li>
-                <li class="col-md-3">
+                <% }); %>
+                <li class="col-md-3 col-sm-6">
                     <a class="card-panel" href="#">
                         <span>New category...</span>
                     </a>
