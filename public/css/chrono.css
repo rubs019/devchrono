@@ -75,3 +75,44 @@ form textarea.form-control {
     transform: scale(1);
   }
 }
+a.card-panel {
+  background-color: #222222;
+  display: block;
+  position: relative;
+  transition: .2s ease-out;
+  border-radius: 3px;
+}
+a.card-panel span {
+  text-align: center;
+  display: block;
+  line-height: 10;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #61dafb;
+}
+a.card-panel:hover {
+  background-color: #2d2d2d;
+}
+a, a:hover, a:focus {
+  color: white;
+  text-decoration: none;
+  outline: none;
+}
+.group-card li {
+  display: inline-block;
+  margin: 15px 0px;
+}
+.group-card li:last-child a.card-panel{
+  background-color: #d2d2d2;
+  transition: ease-out .2s;
+}
+.group-card li:last-child a.card-panel span:last-child {
+  color:#449cb5;
+}
+.group-card li:last-child a.card-panel:hover{
+  background-color: #e2e2e2;
+}
+li {
+  list-style-type: none;
+}

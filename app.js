@@ -7,6 +7,7 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 
 let routes = require('./routes/index');
+let charts = require('./routes/charts');
 
 let app = express();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/charts', charts);
 
 // Set Assets
 app.use('/css', express.static(__dirname + '/public/css'));

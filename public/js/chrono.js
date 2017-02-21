@@ -38,15 +38,15 @@ const chronoDev = function(){
 		}
 		// Message de confirmation
     swal({
-        title							: "Etes-vous sur ?",
-        text							: "Vous allez redémarrez le chrono et tout sera perdu.",
-				type							: "warning",
+        title				: "Etes-vous sur ?",
+        text				: "Vous allez redémarrez le chrono et tout sera perdu.",
+		type				: "warning",
         confirmButtonText	: "Cool",
-				showCancelButton	: true,
-				showConfirmButton	: true,
+		showCancelButton	: true,
+		showConfirmButton	: true,
         cancelButtonText	: "Je vais y réfléchir",
-				closeOnCancel			: false,
-				closeOnConfirm	 	: false
+		closeOnCancel		: false,
+		closeOnConfirm	 	: false
     },
 		function(isConfirm){
         	if(isConfirm){
@@ -65,20 +65,25 @@ const chronoDev = function(){
 	});
 	$('#timer_save').click(function(evt){
 		evt.preventDefault();
+		if(s == 0 && minute == 0){
+            $.notify("Veuillez démarrer le chrono pour enregister un temps", "error");
+            return false;
+		}
 		$.ajax({
 			url: '/tasks/save',
 			type: 'POST',
 			dataType: 'json',
 			data: {
-				minute: minute,
-				second: s,
-				title: encodeURI($('#title_tasks').val()),
-				content: encodeURI($('#content_tasks').val())
+				minute		: minute,
+				second		: s,
+				title		: encodeURI($('#title_tasks').val()),
+				content		: encodeURI($('#content_tasks').val()),
+				categorize 	: encodeURI($('#categorize').val())
 			}
 		})
 		.done(function(callback){
 			let notificationMessage = {
-				succes	: 	"Informations sauvegardé",
+				succes	: 	"Informations sauvegardée",
 				error	:	"Erreur : Veuillez réessayer plus tard"
             };
 
@@ -122,6 +127,8 @@ const chronoDev = function(){
 			/* RESET TOTAL CHRONO*/
 			s = 0;
 			minute = 0;
+            sessionStorage.removeItem('min');
+            sessionStorage.removeItem('sec');
 			app.chronoPrint();
 			app.chronoStatusText();
 			onPlay = false;
